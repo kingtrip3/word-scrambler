@@ -29,36 +29,37 @@ class App extends React.Component {
   render() {
     // setting data into an array
     const data = this.state.data;
-    var str = { data: { sentence: "I love learning code" } };
-    var s = str.innerHTML;
-    var myArr = [];
-    var newArr = "";
-    var word = s.replace(/[\r\n]/g, "").split("");
+    var array = { data: { sentence: "I love learning code" } };
+    console.log(array);
 
-    // mapping through sentence to scramble
-    word.map(function (v) {
-      v.split("").map(function () {
-        var hash = Math.floor(Math.random() * v.length);
-        newArr += v[hash];
-        v = v.replace(v.chartAt(hash), "");
-      });
-      myArr.push(newArr);
-      newArr = "";
-    });
-
-    console.log(myArr);
+    // shuffle function
+    function randomArrayShuffle(array) {
+      var currentIndex = array.length,
+        temporaryValue,
+        randomIndex;
+      while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+      return array;
+    }
+    var alphabet = ["a", "b", "c", "d", "e"];
+    randomArrayShuffle(alphabet);
 
     // Displays sentence from fetched api urlk
     console.warn("data");
     return (
       <div>
-        {data ? (
+        {/* {data ? (
           <div>
             <h1 className="title">{data.data.sentence}</h1>
           </div>
         ) : (
           <h1>Please wait...</h1>
-        )}
+        )} */}
       </div>
     );
   }
